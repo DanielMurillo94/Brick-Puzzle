@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.danielmurillo;
 
 import com.badlogic.gdx.Gdx;
@@ -16,6 +11,8 @@ import java.util.Random;
 /**
  *
  * @author Daniel
+ * The table where the squares and the pieces are seen
+ * There is one instance for the player and another for the CPU
  */
 public class Column {
     public int columnIndex;//The equivalent to the index in an array
@@ -78,10 +75,10 @@ public class Column {
     }
     
     //update the piece, in the case that the piece landed, it will return true
-    public boolean update(float delta, Piece _piece){
+    public boolean update(float delta){
         boolean placedDown = false;
-        if(_piece != null){
-            if(_piece == piece[0])
+        if(piece != null){
+            if(piece == piece[0])
                 projectShadow(_piece);
             if (_piece.update(delta)){//Tries to update the piece, in the case that its time to move it down the function will return true
                 placedDown = putInTable(_piece);

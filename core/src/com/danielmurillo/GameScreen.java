@@ -47,14 +47,14 @@ public class GameScreen implements Screen{
         camera = new OrthographicCamera();
         camera.setToOrtho(false,1280,720);
         
-        columns = new Columns(0,10,700,1000,2);
+        columns = new Columns(0,10,700,1000);
         
         textures = new Texture[3];
         textures[0] = new Texture (Gdx.files.internal("block-red.bmp"));
         textures[1] = new Texture (Gdx.files.internal("block-blue.bmp"));
         textures[2] = new Texture (Gdx.files.internal("block-green.bmp"));
         
-        nextp = new NextPiece(new Vector2(1050,700-230), 230, 230,columns.active[0].piece[0]);
+        nextp = new NextPiece(new Vector2(1050,700-230), 230, 230,columns.columns[0].piece[0]);
         score = new Score(columns,1050,700-230,230);
         
         cpu = new CPUPlayer(columns);
