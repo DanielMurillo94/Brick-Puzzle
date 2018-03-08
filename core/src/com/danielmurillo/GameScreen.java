@@ -47,7 +47,7 @@ public class GameScreen implements Screen{
         camera = new OrthographicCamera();
         camera.setToOrtho(false,1280,720);
         
-        columns = new Columns(0,10,700,1000,3);
+        columns = new Columns(0,10,700,1000,2);
         
         textures = new Texture[3];
         textures[0] = new Texture (Gdx.files.internal("block-red.bmp"));

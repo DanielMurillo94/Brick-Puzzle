@@ -43,11 +43,10 @@ public class Piece {
         unitY = _unitY;
         velocity = 0.5f;
         time = 0;
-        textures = new Texture[3];
+        textures = new Texture[2];
         textures[0] = new Texture (Gdx.files.internal("block-red.bmp"));
         textures[1] = new Texture (Gdx.files.internal("block-blue.bmp"));
-        textures[2] = new Texture (Gdx.files.internal("block-green.bmp"));
-        nextColor = ran.nextInt(3)+1;
+        nextColor = ran.nextInt(2)+1;
         int n = ran.nextInt(7);
         if(n == 0){
             nextType = "O";
@@ -98,7 +97,7 @@ public class Piece {
     
     public void resetPiece(){
         color = nextColor;
-        nextColor = ran.nextInt(3)+1;
+        nextColor = ran.nextInt(2)+1;
         randomFigure();
         position.x = resetX - active.figure.length/2;
         position.y = resetY;
@@ -339,7 +338,6 @@ public class Piece {
     public void setAsShadow(){
         textures[0] = new Texture (Gdx.files.internal("block-red2.bmp"));
         textures[1] = new Texture (Gdx.files.internal("block-blue2.bmp"));
-        textures[2] = new Texture (Gdx.files.internal("block-green2.bmp"));
     }
 }
 

@@ -93,10 +93,9 @@ public class Columns {
     }
     
     public void setColors(){
-        colors = new String[3];
+        colors = new String[2];
         colors[0] = "red";
-        colors[1] = "green";
-        colors[2] = "blue";
+        colors[1] = "blue";
     }
     
     public void addColumn(Column c){
