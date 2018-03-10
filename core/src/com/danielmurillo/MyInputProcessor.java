@@ -33,23 +33,17 @@ public class MyInputProcessor implements InputProcessor{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(columns.gameOver == false){
             if(keycode == Input.Keys.RIGHT)
-                columns.active[0].moveRight(0);
+                columns.columns[0].moveRight(0);
             else if(keycode == Input.Keys.LEFT)
-                columns.active[0].moveLeft(0);
+                columns.columns[0].moveLeft(0);
             else if (keycode == Input.Keys.DOWN){
-                columns.active[0].piece[0].speedUp();
+                columns.columns[0].piece[0].speedUp();
             }
             else if(keycode == Input.Keys.A){
-                columns.active[0].rotateLeft(0);
+                columns.columns[0].rotateLeft(0);
             }
             else if(keycode == Input.Keys.D){
-                columns.active[0].rotateRight(0);
-            }
-            else if(keycode == Input.Keys.Q){
-                columns.changeActive(columns.active[0].leftC,0,0);
-            }
-            else if(keycode == Input.Keys.E){
-                columns.changeActive(columns.active[0].rightC,0,0);
+                columns.columns[0].rotateRight(0);
             }
         }
         return false;
@@ -60,7 +54,7 @@ public class MyInputProcessor implements InputProcessor{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if(columns.gameOver == false)
             if (keycode == Input.Keys.DOWN)
-                columns.active[0].piece[0].speedDown();
+                columns.columns[0].piece[0].speedDown();
         return false;
     }
 
@@ -83,7 +77,7 @@ public class MyInputProcessor implements InputProcessor{
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Vector3 touchPos = new Vector3(screenX, screenY, 0);
         camera.unproject(touchPos);
-        columns.removePenalty(touchPos);
+        //columns.removePenalty(touchPos);
         return false;
     }
 

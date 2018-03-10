@@ -28,12 +28,7 @@ public class Score {
     }
     
     public void update(){
-        score = 0;
-        Column c = cols.start;
-        do{
-            score += c.score;
-            c = c.rightC;
-        }while(c!= cols.start);
+        
     }
     
     public void render(SpriteBatch batch, BitmapFont font){

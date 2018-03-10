@@ -78,11 +78,11 @@ public class Column {
     public boolean update(float delta){
         boolean placedDown = false;
         if(piece != null){
-            if(piece == piece[0])
+            /*if(piece == piece[0])
                 projectShadow(_piece);
             if (_piece.update(delta)){//Tries to update the piece, in the case that its time to move it down the function will return true
                 placedDown = putInTable(_piece);
-            }
+            }*/
         }
         return placedDown;
     }

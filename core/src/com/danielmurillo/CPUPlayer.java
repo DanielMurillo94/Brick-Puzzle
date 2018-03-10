@@ -31,16 +31,7 @@ public class CPUPlayer {
         if(time > velocity){
             //columns.changeActive(columns.active[1].leftC,1, 1);
             time = 0;
-            if(columns.active[1].color != columns.active[1].piece[1].color){
-                columns.changeActive(columns.active[1].leftC,1, 1);
-            }
-            else{
-                checkheight();
-                if(columns.active[1].piece[1].position.x > moveto)
-                    columns.active[1].moveLeft(1);
-                else
-                    columns.active[1].moveRight(1);
-            }
+            
         }
         
     }
@@ -48,7 +39,7 @@ public class CPUPlayer {
     public void checkheight(){
         int mincant = 20;
         int minind = 0;
-        for(int i = 0; i < columns.active[1].table.length;i++){
+        /*for(int i = 0; i < columns.active[1].table.length;i++){
             for(int j = columns.active[1].table[0].length - 1;j>=0;j--){
                 if((columns.active[1].table[i][j] != 0 || j == 0) && j < mincant){
                     mincant = j;
@@ -56,7 +47,7 @@ public class CPUPlayer {
                     break;
                 }
             }
-        }
+        }*/
         moveto = minind;
     }
     

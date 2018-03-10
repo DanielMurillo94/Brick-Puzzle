@@ -31,8 +31,7 @@ public class Columns {
         int margin = 20;
         columns = new Column[2];
         for(int i = 0; i < 2; i++){//Initialize every column
-            Column col = new Column(position.x+margin/2+colwidth*i,position.y,height,colwidth - margin,colors[i]);
-            addColumn(col);
+            columns[i] = new Column(position.x+margin/2+colwidth*i,position.y,height,colwidth - margin,colors[i]);
         }
         gameOver = false;
     }
