@@ -32,12 +32,12 @@ public class NextPiece {
         blockwidth = width/4;
         blockheight = height/4;
         type = "C";
-        color = -1;
+        color = _piece.color;
         back = new Texture(Gdx.files.internal("back-black.bmp"));
     }
     
     public void update(){
-        if(type != piece.nextType || color != piece.nextColor){
+        if(type != piece.nextType){
             getNextPiece();
         }
     }
@@ -57,7 +57,7 @@ public class NextPiece {
     
     public void getNextPiece(){
         type = piece.nextType;
-        color = piece.nextColor;
+        //color = piece.nextColor;
         if(type == "O")
         {
             matrix = new int[4][4];

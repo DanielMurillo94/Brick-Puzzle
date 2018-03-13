@@ -27,7 +27,7 @@ public class Piece {
     float time;
     
     public String nextType,figureType;
-    public int nextColor;
+    //public int nextColor;
     
     Texture[] textures;
     Texture blocktexture;
@@ -35,6 +35,7 @@ public class Piece {
     //creates the piece that you want
     public Piece(Column col, float _unitX, float _unitY){
         //start = new Figure();
+        color = col.color;
         ran = new Random();
         resetX = col.table.length /2;
         resetY = col.table[0].length;
@@ -46,7 +47,7 @@ public class Piece {
         textures = new Texture[2];
         textures[0] = new Texture (Gdx.files.internal("block-red.bmp"));
         textures[1] = new Texture (Gdx.files.internal("block-blue.bmp"));
-        nextColor = ran.nextInt(2)+1;
+        //nextColor = ran.nextInt(2)+1;
         int n = ran.nextInt(7);
         if(n == 0){
             nextType = "O";
@@ -96,8 +97,8 @@ public class Piece {
     }
     
     public void resetPiece(){
-        color = nextColor;
-        nextColor = ran.nextInt(2)+1;
+        //color = nextColor;
+        //nextColor = ran.nextInt(2)+1;
         randomFigure();
         position.x = resetX - active.figure.length/2;
         position.y = resetY;

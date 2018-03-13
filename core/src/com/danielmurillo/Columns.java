@@ -23,14 +23,21 @@ public class Columns {
     public boolean gameOver;
     
     public Columns(int _pX, int _pY, int _height, int _width){
-        setColors();//Starts the array with the colors
+        //Starts the colors
+        colors = new String[2];
+        colors[0] = "red";
+        colors[1] = "blue";
+        
+        //Initialize positions and parameter
         position = new Vector2(_pX, _pY);
         height = _height;
         width = _width;
         int colwidth = width /2;//Is divided by 2 because there are 2 columns
         int margin = 20;
+        
+        //Initialize every column
         columns = new Column[2];
-        for(int i = 0; i < 2; i++){//Initialize every column
+        for(int i = 0; i < 2; i++){
             columns[i] = new Column(position.x+margin/2+colwidth*i,position.y,height,colwidth - margin,colors[i]);
         }
         gameOver = false;
@@ -61,9 +68,4 @@ public class Columns {
         }
     }
     
-    public void setColors(){
-        colors = new String[2];
-        colors[0] = "red";
-        colors[1] = "blue";
-    }
 }

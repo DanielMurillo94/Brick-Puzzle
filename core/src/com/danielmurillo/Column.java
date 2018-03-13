@@ -22,15 +22,15 @@ public class Column {
     public int color;
     public float unitX;//The lenght of the squares in pixels
     public float unitY;
-    public int maxHeight;//The index of the highest block at the moment
+    //public int maxHeight;//The index of the highest block at the moment
     public boolean gameOver;
     public int score;
     
     public Column leftC;
     public Column rightC;
     
-    public Piece[] piece;
-    public Piece shadow;
+    public Piece[] piece;//piece[0] = the actual piece    piece[1] = The next piece
+    public Piece shadow;//The shadow of the piece
     
     private Texture[] back;
             
@@ -68,7 +68,7 @@ public class Column {
         shadow = new Piece(this,unitX, unitY);//Create the object shadow
         shadow.active = piece[0].active;//Give it the same piece to draw
         shadow.setAsShadow();
-        maxHeight = 0;
+        //maxHeight = 0;
         gameOver = false;
         ran = new Random();
         score = 0;
@@ -78,11 +78,10 @@ public class Column {
     public boolean update(float delta){
         boolean placedDown = false;
         if(piece != null){
-            /*if(piece == piece[0])
-                projectShadow(_piece);
-            if (_piece.update(delta)){//Tries to update the piece, in the case that its time to move it down the function will return true
-                placedDown = putInTable(_piece);
-            }*/
+            projectShadow(piece[0]);
+            if (piece[0].update(delta)){//Tries to update the piece, in the case that its time to move it down the function will return true
+                placedDown = putInTable(piece[0]);
+            }
         }
         return placedDown;
     }
@@ -91,50 +90,16 @@ public class Column {
         score += 1;
         int[][] arr = _piece.active.figure;//We take the array of the figure
         if(!movePiece(_piece,arr,0,-1)){//We try to move it down 1 block, if we can't is because it's time to land it
-            if(_piece.color == color){//If the piece is of the same color of the table
-                score += 10;
-                for(int i = 0; i < arr.length; i++){
-                    for(int j = 0; j< arr[0].length;j++){//Cycle every block in the array of the figure
-                        if(arr[i][j] != 0){//Whenever is not empty, it will save it on the table array
-                            if(_piece.position.y + j >= table[0].length){ //If the piece placed is above the vertical limit
-                                gameOver = true;
-                                return true;
-                            }
-                            else{
-                                table[(int)_piece.position.x + i][(int)_piece.position.y + j] = _piece.color;
-                            }
+            score += 10;
+            for(int i = 0; i < arr.length; i++){
+                for(int j = 0; j< arr[0].length;j++){//Cycle every block in the array of the figure
+                    if(arr[i][j] != 0){//Whenever is not empty, it will save it on the table array
+                        if(_piece.position.y + j >= table[0].length){ //If the piece placed is above the vertical limit
+                            gameOver = true;
+                            return true;
                         }
-                    }
-                }
-            }
-            else{//If the piece color is different to the table color
-                int nh = 0;
-                int no = 0;
-                for(int i = 0; i < arr.length; i++){
-                    for(int j = 0; j< arr[0].length;j++){//Cycle every block in the array of the figure
-                        if(arr[i][j] != 0){//Whenever is not empty
-                            if(_piece.position.y+j < table.length){
-                                boolean keep = true;
-                                while(keep){
-                                    if(ran.nextInt(2) == 0 && nh < 2){
-                                        table[(int)_piece.position.x + i][(int)_piece.position.y + j] = _piece.color;
-                                        nh++;
-                                        keep = false;
-                                    }
-                                    else if(no < 2){
-                                        if(no == 0)
-                                            penalty(rightC);
-                                        if(no == 1)
-                                            penalty(leftC);
-                                        no++;
-                                        keep = false;
-                                    }
-                                }
-                            }
-                            else{
-                                gameOver = true;
-                                return true;
-                            }
+                        else{
+                            table[(int)_piece.position.x + i][(int)_piece.position.y + j] = _piece.color;
                         }
                     }
                 }
@@ -150,9 +115,9 @@ public class Column {
         //Draws the background
         for(int i = 0; i < table.length;i++){
             for (int j = 0; j < table[0].length;j++){
-                if(j <= maxHeight)//Here draws with one type of tile to indicate when you cannot switch to this column
-                    batch.draw(back[1],position.x + i*unitX, position.y +j*unitY, unitX, unitY);
-                else//Here draws with another to indicate when you can switch to this column
+                //if(j <= maxHeight)//Here draws with one type of tile to indicate when you cannot switch to this column
+                //    batch.draw(back[1],position.x + i*unitX, position.y +j*unitY, unitX, unitY);
+                //else//Here draws with another to indicate when you can switch to this column
                     batch.draw(back[0],position.x + i*unitX, position.y +j*unitY, unitX, unitY);
             }
         }
@@ -212,12 +177,9 @@ public class Column {
     public void checkLines(){
         for(int j = 0; j < table[0].length; j++){
             int total = 0;//This will save the number of blocks with the color of the column
-            int emptysquares = 0;//This will save the number of emtpty blocks
-            for(int i = 0; i<table.length;i++){//This cycle goes through one row
+            for(int i = 0; i < table.length;i++){//This cycle goes through one row 
                 if(table[i][j] == color)
                     total++;
-                else if(table[i][j] == 0)
-                    emptysquares++;
             }
             if(total == table.length){
                 deleteLine(j);//if the row was full, deletes it
@@ -225,10 +187,10 @@ public class Column {
                 j--;//we need to extract 1 from j because when the row is deleted, everything that is above that line goes down one line
                 score += 100;
             }
-            if (emptysquares == table.length){
+            /*if (emptysquares == table.length){
                 maxHeight = j - 1;//if the line is empty, that means that there are no more blocks, so, the masimun height was just reached
                 break;
-            }
+            }*/
         }
     }
     

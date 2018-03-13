@@ -23,7 +23,7 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen implements Screen{
     final Main game;
     
-    private OrthographicCamera camera;
+    private final OrthographicCamera camera;
     
     SpriteBatch batch;
     BitmapFont font;
@@ -31,9 +31,9 @@ public class GameScreen implements Screen{
     
     NextPiece nextp;
     Columns columns;
-    private CPUPlayer cpu;
-    private Texture[] textures;
-    private Score score;
+    private final CPUPlayer cpu;
+    private final Texture[] textures;
+    private final Score score;
     
     
     
@@ -87,6 +87,7 @@ public class GameScreen implements Screen{
         //Updates everything
         columns.update(delta);
         cpu.update(delta);
+        
         nextp.update();
         score.update();
 
