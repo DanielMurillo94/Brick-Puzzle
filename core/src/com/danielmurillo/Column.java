@@ -149,6 +149,15 @@ public class Column {
             return false;
     }
     
+    public boolean movePiece(int cx, int cy){
+        if(canMove(piece[0],table,cx,cy)){
+                piece[0].position.x += cx;
+                piece[0].position.y += cy;
+                return true;
+            }            
+            return false;
+    }
+    
     //Checks if the matrix can move the number of blocks indicated by cx and cy relative to its actual position
     public boolean canMove(Piece _piece,int[][] matrix,int cx, int cy){
         boolean canupdate = true;

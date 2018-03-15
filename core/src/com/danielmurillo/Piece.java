@@ -25,6 +25,9 @@ public class Piece {
     int resetX, resetY;
     float velocity;
     float time;
+    public int fStart;
+    
+    public boolean reseted;
     
     public String nextType,figureType;
     //public int nextColor;
@@ -35,6 +38,7 @@ public class Piece {
     //creates the piece that you want
     public Piece(Column col, float _unitX, float _unitY){
         //start = new Figure();
+        reseted = true;
         color = col.color;
         ran = new Random();
         resetX = col.table.length /2;
@@ -103,6 +107,23 @@ public class Piece {
         position.x = resetX - active.figure.length/2;
         position.y = resetY;
         blocktexture = textures[color-1];
+        reseted = true;
+        fStart = getfStart();
+    }
+    
+    private int getfStart(){
+        int ind = 0;
+        boolean startF = false;
+        for(int i = 0; i < active.figure.length;i++){
+            for(int j = active.figure[0].length - 1; j >= 0; j--){
+                if(active.figure[i][j] != 0)
+                    startF = true;
+            }
+            ind = i;
+            if(startF)
+                break;
+        }
+        return ind;
     }
     
     private void randomFigure(){

@@ -12,13 +12,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Daniel   
  */
 public class CPUPlayer {
-    Columns columns;
+    //Columns columns;
+    Column column;
+    Piece piece;
     float time;
     float velocity;
     int moveto;
     
-    public CPUPlayer(Columns _cols){
-        columns = _cols;
+    public CPUPlayer(Column _cols){
+        column = _cols;
+        piece = column.piece[0];
         time = 0;
         velocity = 1;
         moveto = 30;
@@ -29,8 +32,17 @@ public class CPUPlayer {
         //columns.cpuActive.update(delta);
         time += delta;
         if(time > velocity){
-            //columns.changeActive(columns.active[1].leftC,1, 1);
             time = 0;
+            if(piece.reseted){
+                checkheight();
+                piece.reseted = false;
+            }
+            if(piece.position.x + piece.fStart < moveto)
+                column.moveRight(0);
+            else if(piece.position.x + piece.fStart > moveto)
+                column.moveLeft(0);
+            else
+                rotate();
             
         }
         
@@ -39,16 +51,20 @@ public class CPUPlayer {
     public void checkheight(){
         int mincant = 20;
         int minind = 0;
-        /*for(int i = 0; i < columns.active[1].table.length;i++){
-            for(int j = columns.active[1].table[0].length - 1;j>=0;j--){
-                if((columns.active[1].table[i][j] != 0 || j == 0) && j < mincant){
+        for(int i = 0; i < column.table.length;i++){
+            for(int j = column.table[0].length - 1;j>=0;j--){
+                if((column.table[i][j] != 0 || j == 0) && j < mincant){
                     mincant = j;
                     minind = i;
                     break;
                 }
             }
-        }*/
+        }
         moveto = minind;
+    }
+    
+    public void rotate(){
+        
     }
     
     public void render(SpriteBatch batch){

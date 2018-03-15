@@ -57,12 +57,11 @@ public class GameScreen implements Screen{
         nextp = new NextPiece(new Vector2(1050,700-230), 230, 230,columns.columns[0].piece[0]);
         score = new Score(columns,1050,700-230,230);
         
-        cpu = new CPUPlayer(columns);
+        cpu = new CPUPlayer(columns.columns[1]);
         
          //Sets the input processor
         MyInputProcessor inputs = new MyInputProcessor(columns, camera);
         Gdx.input.setInputProcessor(inputs);
-        
     }
 
     @Override
